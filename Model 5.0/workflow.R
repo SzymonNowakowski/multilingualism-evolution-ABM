@@ -16,15 +16,15 @@
 
 # Function to create a list of the default parameters that are (likely) to remain stable across model runs. 
 get_default_params = function() {
-  params = list()
-  params["generation_size"] = 100
-  params["generations_n"] = 11
-  params["languages_n"] = 3
-  params["speaker_freq"] = c(1/3, 1/3, 1/3)
-  params["prop_of_intra_household_interactions"] = 0.5
-  params["parent_language_choice"] = "random"
-  params["child_language_choice"] = "random"
-  params["others_language_choice"] = "random"
+  params <- list()
+  params$generation_size <- 100
+  params$generations_n <- 11
+  params$languages_n <- 3
+  params$speaker_freqs <- c(1/3, 1/3, 1/3)
+  params$prop_of_intra_household_interactions <- 0.5
+  params$parent_language_choice <- "random"
+  params$child_language_choice <- "random"
+  params$others_language_choice <- "random"
   
   return(params)
 }
@@ -88,14 +88,20 @@ run_model_reps = function(params, root_output_directory, numreps=10) {
 # named for the parameter being swept, and its value in this set of runs. Inside the folder is a folder for each run (rep), containing the value of the random seed, the .json file of parameter values, and the output of the model run. 
 
 #targetParam: the name of the parameter you want to sweep over
-#targetParamValues: the values you want to sweep over (list or vector)
+#targetParamValues: the VECTOR of values you want to sweep over 
+
+# SzymonNowakowski's comment: 
+# I have seen it executed only with a vector targetParamValues, not a list 
+# and if you really want the code to support lists of values in targetParamValues
+# change the below code according to a NOTE
+
 run_model_sweep = function(base_params, root_output_directory, target_param, target_param_values, numreps=10) {
   for (iVal in 1:length(target_param_values)) {
     # for each unique value of the target parameter, name the folder to hold all runs of the model that uses this parameter value. 
     param_set_output_directory = file.path(root_output_directory, paste0(target_param, "=", target_param_values[iVal]))
     params = copy(base_params)
     # overwrite the default parameter value with the current value of the target parameter
-    params[target_param] = target_param_values[iVal]
+    params[[target_param]] <- target_param_values[iVal]   #NOTE! IF YOU REALLY WANT IT TO WORK FOR LISTS, IT SHOULD READ SOMETHING LIKE <- unlist(target_param_values[iVal])
     
     run_model_reps(params, param_set_output_directory, numreps=numreps)
   }
