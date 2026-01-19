@@ -220,11 +220,11 @@ if (!dir.exists("Model 5.0/figures")) {
   dir.create("Model 5.0/figures", recursive = TRUE)
 }
 save_plot(plot_25, filename = paste0("Model 5.0/figures/", scenario_name, "_plot_25.png"))
-save_plot(plot_25, filename = paste0("Model 5.0/figures/", scenario_name, "_plot_49.png"))
+save_plot(plot_49, filename = paste0("Model 5.0/figures/", scenario_name, "_plot_49.png"))
 
 
 
-
+### SZN: FROM HERE THE PLOTTING FAILS         
 
 
 
