@@ -107,9 +107,9 @@ Open the files with `Model Plotting` in their names. These contain functions and
 
 #### Example Figures
 
-<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL!_random_plot_25.png" width="350">
+<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL1_random_plot_25.png" width="350">
 
-<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL!_random_plot_49.png" width="350">
+<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL1_random_plot_49.png" width="350">
 
 
 
