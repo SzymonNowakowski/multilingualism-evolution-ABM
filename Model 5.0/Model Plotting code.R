@@ -27,14 +27,11 @@
 # Across generations within a household
 # -	Parent natal language and child speaking values in each of the three languages (at age 24? (the age right before children become parents)). 
 
-for(scenario in)
-
 # Read in the output of the model sweep. 
-sweep_results = read_model_sweep(root_output_directory = "./Model 5.0/model_output/all_random/", target_param_values = c(0.25, 0.5, 0.75))
+# CONFIGURATION
+scenario_name <- "parentL1_random"
 
-
-sweep_results = read_model_sweep(root_output_directory = "./Model 5.0/model_output/unbalanced_speakers/parentL1_random/", target_param_values = c(0.25, 0.5, 0.75))
-
+sweep_results <- read_model_sweep(root_output_directory = paste0("./Model 5.0/model_output/", scenario_name, ""), target_param_values = c(0.25, 0.5, 0.75))
 
 
 #  This function returns a table summarizing the number of speakers of each language in each generation. You must specify the age of the speakers you want to count, and the threshold of speaking ability that you will count as 'speaking' the language. Defaults to 100 (mastery)
@@ -57,7 +54,7 @@ count_age_specific_speakers <- function(output, efficacy_threshold = 100, count_
 ### Create a list of # of speakers of each language, aged 49, for each run of the model across each target_param value of the sweep
 speaker_counts_25 <- list() # Initialize the list to store results
 # fill the list
- for(param_set_name in names(sweep_results)){
+for(param_set_name in names(sweep_results)){
    ### Count the number of speakers of each language at the end of each generation
   count_speakers <- lapply(seq_along(sweep_results[[param_set_name]]), function(rep_index) {
     # Access the data frame for the current repetition
@@ -212,14 +209,18 @@ speaker_count_49_plots = lineplot_model_output(speaker_counts_49,
 
 # Make compound plot: Number of speakers of each language in each generation at age 25, across parameter sweep values
 plot_25 = plot_grid(plotlist = speaker_count_25_plots,
-          ncol = 1, rel_heights = c(rep(1, length(speaker_count_plots) - 1),0.25))
+          ncol = 1, rel_heights = c(rep(1, length(speaker_count_25_plots) - 1),0.25))
 
 # Compound plot: # of speakers of each language in each generation at age 49, across parameter sweep values
 plot_49 = plot_grid(plotlist = speaker_count_49_plots,
-          ncol = 1, rel_heights = c(rep(1, length(speaker_count_plots) - 1),0.25))
+          ncol = 1, rel_heights = c(rep(1, length(speaker_count_49_plots) - 1),0.25))
 
 
-save_plot(plot_25, filename = )
+if (!dir.exists("Model 5.0/figures")) {
+  dir.create("Model 5.0/figures", recursive = TRUE)
+}
+save_plot(plot_25, filename = paste0("Model 5.0/figures/", scenario_name, "_plot_25.png"))
+save_plot(plot_25, filename = paste0("Model 5.0/figures/", scenario_name, "_plot_49.png"))
 
 
 
@@ -247,9 +248,9 @@ save_plot(plot_25, filename = )
 # -	It looks like ‘random consistent’ and ‘L1’ don’t actually matter because each of the languages has the same probability of being chosen as a parental language under these two scenarios. Except that under the random choice scenario, children seem to learn the prestige language slightly faster. Not sure why. Maybe this is stochastic variation b/c right now these are all single runs. 
 
 
-speakers100_table <- speakers100 %>%
-  group_by(scenario, generation, Language) %>%
-  summarise(speakers = n()) %>% arrange(scenario, Language)
+#speakers100_table <- speakers100 %>%
+#  group_by(scenario, generation, Language) %>%
+#  summarise(speakers = n()) %>% arrange(scenario, Language)
 
 
 
@@ -258,7 +259,7 @@ speakers100_table <- speakers100 %>%
 
 
 
-listeners-all <- data.frame()
+listeners_all <- data.frame()
 for(i in 1:length(sweeps)){
   new_output <- data.frame()
   
@@ -286,8 +287,8 @@ understands <- names(sweeps[[1]]$output %>% select(starts_with("Understands")))
 
 
 ##### * -	Distribution of speaking values for each language in each generation at age 49.
--	Distribution of understanding values for each language in each generation at age 49.
--	How many generations to run the prestige scenarios before the other languages are dead? <------------
+#-	Distribution of understanding values for each language in each generation at age 49.
+#-	How many generations to run the prestige scenarios before the other languages are dead? <------------
   
   
   

@@ -96,10 +96,14 @@ In your own workspace, from inside the `Model 5.0` folder, Open and run `Make_Fi
     
 ### Step 2 ###  
 Open `Model 5.0 Sweeps.R` and either run it, or use it as a template from which to set up the model scenarios that you are interested in running.
-  **Note: If you run this file as is, it will take at least a full day on a laptop. I recommend running it on a desktop, at least.**  
+  ~~**Note: If you run this file as is, it will take at least a full day on a laptop. I recommend running it on a desktop, at least.**~~
+  **Note: If you run this file as is, it will take aproximately 61 hours on a desktop.**
 
 ### Step 3 ### 
 Open the files with `Model Plotting` in their names. These contain functions and code designed to read in the simulated data from a model sweep, and functions to produce multipanel plots of the output from a sweep.   
+  **Note: Currently plots that work are up to L223. The the execution fails. Note in L32 one can configure the scenario name to generate plots.**
+
+
 
 
 # Beyond the current architecture: Easy adjustments to the existing model  
