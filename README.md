@@ -102,8 +102,14 @@ Open `Model 5.0 Sweeps.R` and either run it, or use it as a template from which 
 
 ### Step 3 ### 
 Open the files with `Model Plotting` in their names. These contain functions and code designed to read in the simulated data from a model sweep, and functions to produce multipanel plots of the output from a sweep.   
+
   **Note: Currently plots that work are up to L223. Then the execution fails due to uninitiated variables. Also, note in L32 one can configure the scenario name to generate plots.**
 
+#### Example Figures
+
+<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL!_random_plot_25.png" width="350">
+
+<img src="https://raw.githubusercontent.com/SzymonNowakowski/multilingualism-evolution-ABM/main/Model%205.0/figures/parentL!_random_plot_49.png" width="350">
 
 
 
